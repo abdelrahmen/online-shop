@@ -2,6 +2,16 @@
 <%- include('parts/navbar.ejs')%>
 
 <div class="container">
+  <form action="/" method="get">
+    <select name="category" id="form-control">
+      <option value="all">All</option>
+      <option value="clothes">Clothes</option>
+      <option value="phones">Phones</option>
+      <option value="electronics">Electronics</option>
+      <option value="computers">Computers</option>
+    </select>
+    <input type="submit" value="Filter" class="btn btn-primary">
+  </form>
   <div class="row">
     <% for(let product of products){ %>
         <div class="col col-12 col-md-6 col-lg-4 col-xl-3">
@@ -12,7 +22,7 @@
                     <a href="/product/<%= product._id %>"><%= product.name %> </a>
                     <p>Price: <%= product.price %>$ </p>
                   </h5>
-                  <form action="/cart">
+                  <form action="/cart" method="post">
                     <input type="number" name="amount" class="form-control">
                     <input type="submit" value="Add to cart" class="btn btn-primary">
                   </form>

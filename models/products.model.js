@@ -14,7 +14,7 @@ const productSchema = mongoose.Schema({
 });
 
 // #4 make the data model with the defined schema
-const product = mongoose.model('product', productSchema);
+const product = mongoose.model("product", productSchema);
 // #5 export the data
 exports.getAllProducts = () => {
   // #6 connect to the database
@@ -33,5 +33,20 @@ exports.getAllProducts = () => {
       .catch((err) => {
         reject(err);
       });
+  });
+};
+
+exports.getProductsByCategory = (category) => {
+  return new Promise((resolve, reject) => {
+    mongoose
+      .connect(DB_URL)
+      .then(() => {
+        return product.find({ category: category });
+      })
+      .then((products) => {
+        mongoose.disconnect();
+        resolve(products);
+      })
+      .catch((err) => reject(err));
   });
 };
