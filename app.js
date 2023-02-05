@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 
 const homeRouter = require("./routes/home.route.js");
+const productRouter = require("./routes/product.route");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use("/", homeRouter);
+app.use("/product", productRouter);
 
 app.listen(3000, (err) => {
   console.log("server listening on port 3000");
