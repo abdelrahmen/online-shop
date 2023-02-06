@@ -1,5 +1,4 @@
-<%- include('parts/header.ejs')%>
-<%- include('parts/navbar.ejs')%>
+<%- include('parts/header.ejs')%> <%- include('parts/navbar.ejs')%>
 
 <div class="container">
   <form action="/" method="get">
@@ -10,27 +9,31 @@
       <option value="electronics">Electronics</option>
       <option value="computers">Computers</option>
     </select>
-    <input type="submit" value="Filter" class="btn btn-primary">
+    <input type="submit" value="Filter" class="btn btn-primary" />
   </form>
+  <% if (products.length == 0) { %>
+  <div class="alert alert-danger">there is no products</div>
+  <% }else { %>
   <div class="row">
     <% for(let product of products){ %>
-        <div class="col col-12 col-md-6 col-lg-4 col-xl-3">
-            <div class="card" style="width: 18rem;">
-                <img src="<%= product.image %>" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <a href="/product/<%= product._id %>"><%= product.name %> </a>
-                    <p>Price: <%= product.price %>$ </p>
-                  </h5>
-                  <form action="/cart" method="post">
-                    <input type="number" name="amount" class="form-control">
-                    <input type="submit" value="Add to cart" class="btn btn-primary">
-                  </form>
-                </div>
-              </div>
+    <div class="col col-12 col-md-6 col-lg-4 col-xl-3">
+      <div class="card" style="width: 18rem">
+        <img src="<%= product.image %>" class="card-img-top" />
+        <div class="card-body">
+          <h5 class="card-title">
+            <a href="/product/<%= product._id %>"><%= product.name %> </a>
+            <p>Price: <%= product.price %>$</p>
+          </h5>
+          <form action="/cart" method="post">
+            <input type="number" name="amount" class="form-control" />
+            <input type="submit" value="Add to cart" class="btn btn-primary" />
+          </form>
         </div>
+      </div>
+    </div>
     <% } %>
   </div>
+  <% } %>
 </div>
 
 <%- include('parts/footer.ejs')%>
