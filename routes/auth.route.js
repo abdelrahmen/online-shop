@@ -19,4 +19,6 @@ router.post(
   authController.postLogin
 );
 
+router.all('/logout', authController.logout)
+
 module.exports = router;

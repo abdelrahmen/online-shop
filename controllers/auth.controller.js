@@ -16,7 +16,9 @@ exports.postSignup = (req, res, next) => {
 };
 
 exports.getLogin = (req, res, next) => {
-  res.render("login");
+  res.render("login", {
+    authError: req.flash("authError")[0],
+  });
 };
 
 exports.postLogin = (req, res, next) => {
@@ -27,7 +29,13 @@ exports.postLogin = (req, res, next) => {
       res.redirect("/");
     })
     .catch((err) => {
-      console.log(err);
+      req.flash("authError", err);
       res.redirect("/login");
     });
+};
+
+exports.logout = (req, res, next) => {
+  req.session.destroy(() => {
+    res.redirect("/");
+  });
 };
