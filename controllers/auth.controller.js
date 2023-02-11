@@ -24,20 +24,26 @@ exports.postSignup = (req, res, next) => {
 exports.getLogin = (req, res, next) => {
   res.render("login", {
     authError: req.flash("authError")[0],
+    validationErrors: req.flash("validationErrors"),
   });
 };
 
 exports.postLogin = (req, res, next) => {
-  authModel
-    .login(req.body.email, req.body.password)
-    .then((id) => {
-      req.session.userId = id;
-      res.redirect("/");
-    })
-    .catch((err) => {
-      req.flash("authError", err);
-      res.redirect("/login");
-    });
+  if (validationResult(req).isEmpty()) {
+    authModel
+      .login(req.body.email, req.body.password)
+      .then((id) => {
+        req.session.userId = id;
+        res.redirect("/");
+      })
+      .catch((err) => {
+        req.flash("authError", err);
+        res.redirect("/login");
+      });
+  } else {
+    req.flash("validationErrors", validationResult(req).array());
+    res.redirect("/login");
+  }
 };
 
 exports.logout = (req, res, next) => {

@@ -16,9 +16,11 @@ router.post(
     .withMessage("email is required")
     .isEmail()
     .withMessage("Invalid email"),
-  check("password").isLength({ min: 6, max: 32 }).withMessage("password must be between 6 & 32 characters"),
+  check("password")
+    .isLength({ min: 6, max: 32 })
+    .withMessage("password must be between 6 & 32 characters"),
   check("confirmPassword").custom((value, { req }) => {
-    if ((value == req.body.password)) return true;
+    if (value == req.body.password) return true;
     else throw new Error("the 2 password fields must be equal");
   }),
   authController.postSignup
@@ -29,6 +31,13 @@ router.get("/login", authController.getLogin);
 router.post(
   "/login",
   bodyParser.urlencoded({ extended: true }),
+  check("email")
+    .not()
+    .isEmpty()
+    .withMessage("email is required")
+    .isEmail()
+    .withMessage("Invalid email"),
+  check("password").not().isEmpty().withMessage("password cannot be empty"),
   authController.postLogin
 );
 

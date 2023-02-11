@@ -21,6 +21,9 @@
   <% if (authError) { %>
   <br />
   <p class="alert alert-danger"><%= authError %></p>
+  <% }else if (validationErrors.length != 0) { %> 
+  <br />
+  <p class="alert alert-danger"><%= validationErrors.map(err=> err.msg).join(", ") %></p>
   <% } %>
   <br />
   <div>Don't have an account? <a href="/signup">Create an account</a></div>

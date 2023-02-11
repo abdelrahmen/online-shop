@@ -30,7 +30,7 @@
       name="password"
       placeholder="Password"
     />
-    <br>
+    <br />
     <% let passwordError = validationErrors.find(err=>err.param=="password")%>
     <% if(passwordError) { %>
     <p class="alert alert-danger"><%= passwordError.msg %></p>
