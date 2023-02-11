@@ -15,11 +15,11 @@ router.post(
     .isEmpty()
     .withMessage("email is required")
     .isEmail()
-    .withMessage("invalid email format"),
+    .withMessage("Invalid email"),
   check("password").isLength({ min: 6, max: 32 }).withMessage("password must be between 6 & 32 characters"),
   check("confirmPassword").custom((value, { req }) => {
-    if ((value = req.body.password)) return true;
-    else throw "the 2 password fields must be equal";
+    if ((value == req.body.password)) return true;
+    else throw new Error("the 2 password fields must be equal");
   }),
   authController.postSignup
 );
