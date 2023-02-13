@@ -2,13 +2,27 @@
 
 <div class="container">
   <% if (!product) { %>
-  <div class="alert alert-danger">there is no produc that match this id</div>
-  <% } else { %>
+  <div class="alert alert-danger">there is no product that match this id</div>
+  <% } else { %> 
+  <% if (validationErrors) { %>
+    <br>
+    <p class="alert alert-danger"><%= validationErrors.msg %></p>
+  <% } %>
   <div class="row">
     <div class="col col-12 col-md-6">
       <img src="/<%= product.image %> " alt="" />
+      <br>
       <form action="/cart" method="post">
         <input type="number" name="amount" class="form-control" />
+        <input type="hidden" name="name" value="<%= product.name %>" />
+        <input type="hidden" name="price" value="<%= product.price %>" />
+        <input type="hidden" name="productId" value="<%= product._id %>" />
+        <input
+          type="hidden"
+          name="redirectTo"
+          value="/product/<%= product._id %>"
+        />
+        <br>
         <input type="submit" value="Add to cart" class="btn btn-primary" />
       </form>
     </div>

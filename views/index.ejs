@@ -11,6 +11,10 @@
     </select>
     <input type="submit" value="Filter" class="btn btn-primary" />
   </form>
+
+  <% if (validationErrors) { %>
+  <p class="alert alert-danger"><%= validationErrors.msg %></p>
+  <% } %>
   <% if (products.length == 0) { %>
   <div class="alert alert-danger">there is no products</div>
   <% }else { %>
@@ -18,7 +22,7 @@
     <% for(let product of products){ %>
     <div class="col col-12 col-md-6 col-lg-4 col-xl-3">
       <div class="card" style="width: 18rem">
-        <img src="<%= product.image %>" class="card-img-top" />
+        <img src="<%= product.image %>" class="card-img-top" alt="" />
         <div class="card-body">
           <h5 class="card-title">
             <a href="/product/<%= product._id %>"><%= product.name %> </a>
@@ -26,6 +30,10 @@
           </h5>
           <form action="/cart" method="post">
             <input type="number" name="amount" class="form-control" />
+            <input type="hidden" name="name" value="<%= product.name %>" />
+            <input type="hidden" name="price" value="<%= product.price %>" />
+            <input type="hidden" name="productId" value="<%= product._id %>" />
+            <input type="hidden" name="redirectTo" value="/" />
             <input type="submit" value="Add to cart" class="btn btn-primary" />
           </form>
         </div>
