@@ -4,6 +4,7 @@ const authModel = require("../models/auth.model");
 exports.getSignup = (req, res, next) => {
   res.render("signup", {
     validationErrors: req.flash("validationErrors"),
+    isUser: req.session.userId,
   });
 };
 
@@ -25,6 +26,7 @@ exports.getLogin = (req, res, next) => {
   res.render("login", {
     authError: req.flash("authError")[0],
     validationErrors: req.flash("validationErrors"),
+    isUser: req.session.userId,
   });
 };
 

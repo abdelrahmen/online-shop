@@ -36,5 +36,5 @@ app.use("/", authRouter);
 app.use("/product", productRouter);
 
 app.listen(3000, (err) => {
-  console.log("server listening on port 3000");
+  console.log("server listening on port 3000, http://localhost:3000");
 });
