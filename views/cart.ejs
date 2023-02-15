@@ -1,0 +1,37 @@
+<%- include('parts/header.ejs')%> <%- include('parts/navbar.ejs')%>
+<div class="container">
+  <% if(items.length == 0) {%>
+  <p class="alert alert-danger">there's no items</p>
+  <%} else {%> 
+    <br>
+    <table class="table table-bordered">
+        <thead>
+            <td>no.</td>
+            <td>Product name</td>
+            <td>Price</td>
+            <td>Amount</td>
+            <td>Total</td>
+            <td></td>
+        </thead>
+        <tbody>
+            <% for( let i = 0; i < items.length; i++ ) { %>
+                <tr>
+                    <td><%= i+1 %></td>
+                    <td> <%= items[i].name %></td>
+                    <td> <%= items[i].price %></td>
+                    <form method="post">
+                        <td><input type="text" name="amount" class="form-control" value=<%= items[i].amount %>></td>
+                        <td><%= items[i].price * items[i].amount %></td>
+                        <td>
+                            <input type="hidden" name="cartId" value=<%= items[i]._id %>>
+                            <input type="submit" name="btn btn-success" value='save' formaction="/cart/save">
+                            <input type="submit" name="btn btn-danger" value='delete' formaction="/cart/delete">
+                        </td>
+                    </form>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+  <% } %>
+</div>
+<%-include('parts/footer.ejs')%>

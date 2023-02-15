@@ -24,3 +24,17 @@ exports.postCart = (req, res, next) => {
     res.redirect(req.body.redirectTo);
   }
 };
+
+exports.getCart = (req, res, next) => {
+  cartModel
+    .getItemsByUser(req.session.userId)
+    .then((items) => {
+      res.render("cart", {
+        items: items,
+        isUser: true,
+      });
+    })
+    .catch((err) => {
+      console0log(err);
+    });
+};

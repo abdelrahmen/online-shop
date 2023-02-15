@@ -31,3 +31,21 @@ exports.addNewItem = (data) => {
       });
   });
 };
+
+exports.getItemsByUser = (userId) => {
+  return new Promise((resolve, reject) => {
+    mongoose
+      .connect(DB_URL)
+      .then(() =>
+        CartItem.find({ userId: userId }, {}, { sort: { timestamp: 1 } })
+      )
+      .then((items) => {
+        mongoose.disconnect();
+        resolve(items);
+      })
+      .catch((err) => {
+        mongoose.disconnect();
+        reject(err);
+      });
+  });
+};

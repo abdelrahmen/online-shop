@@ -5,6 +5,8 @@ const check = require("express-validator").check;
 
 const cartController = require("../controllers/cart.controller");
 
+router.get('/',authGuard.isAuth,cartController.getCart)
+
 router.post(
   "/",
   authGuard.isAuth,
