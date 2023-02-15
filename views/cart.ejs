@@ -4,6 +4,9 @@
   <p class="alert alert-danger">there's no items</p>
   <%} else {%> 
     <br>
+    <% if (validationErrors.length !=0) { %>
+     <p class="alert alert-danger"><%= validationErrors.map(e=>e.msg).join() %></p>
+    <% } %>
     <table class="table table-bordered">
         <thead>
             <td>no.</td>

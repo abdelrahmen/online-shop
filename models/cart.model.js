@@ -49,3 +49,35 @@ exports.getItemsByUser = (userId) => {
       });
   });
 };
+
+exports.editItem = (id, newData) => {
+  return new Promise((resolve, reject) => {
+    mongoose
+      .connect(DB_URL)
+      .then(() => CartItem.updateOne({ _id: id }, newData))
+      .then((items) => {
+        mongoose.disconnect();
+        resolve(items);
+      })
+      .catch((err) => {
+        mongoose.disconnect();
+        reject(err);
+      });
+  });
+};
+
+exports.deleteItem = (id)=>{
+  return new Promise((resolve, reject) => {
+    mongoose
+      .connect(DB_URL)
+      .then(() => CartItem.findByIdAndDelete(id))
+      .then((items) => {
+        mongoose.disconnect();
+        resolve(items);
+      })
+      .catch((err) => {
+        mongoose.disconnect();
+        reject(err);
+      });
+  });
+}

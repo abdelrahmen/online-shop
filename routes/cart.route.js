@@ -5,7 +5,7 @@ const check = require("express-validator").check;
 
 const cartController = require("../controllers/cart.controller");
 
-router.get('/',authGuard.isAuth,cartController.getCart)
+router.get("/", authGuard.isAuth, cartController.getCart);
 
 router.post(
   "/",
@@ -17,7 +17,27 @@ router.post(
     .withMessage("amount in required")
     .isInt({ min: 1 })
     .withMessage("amount should be more than 0"),
-    cartController.postCart
+  cartController.postCart
+);
+
+router.post(
+  "/save",
+  authGuard.isAuth,
+  bodyParser.urlencoded({ extended: true }),
+  check("amount")
+    .not()
+    .isEmpty()
+    .withMessage("amount in required")
+    .isInt({ min: 1 })
+    .withMessage("amount should be more than 0"),
+  cartController.postSave
+);
+
+router.post(
+  "/delete",
+  authGuard.isAuth,
+  bodyParser.urlencoded({ extended: true }),
+  cartController.postDelete
 );
 
 module.exports = router;

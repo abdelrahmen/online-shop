@@ -32,9 +32,32 @@ exports.getCart = (req, res, next) => {
       res.render("cart", {
         items: items,
         isUser: true,
+        validationErrors: req.flash("validationErrors"),
       });
     })
     .catch((err) => {
       console0log(err);
     });
+};
+
+exports.postSave = (req, res, next) => {
+  if (validationResult(req).isEmpty()) {
+    cartModel
+      .editItem(req.body.cartId, {
+        amount: req.body.amount,
+        timestamp: Date.now(),
+      })
+      .then(() => res.redirect("/cart"))
+      .catch((err) => console.log(err));
+  } else {
+    req.flash("validationErrors", validationResult(req).array());
+    res.redirect("/cart");
+  }
+};
+
+exports.postDelete = (req, res, next) => {
+  cartModel
+    .deleteItem(req.body.cartId)
+    .then(() => res.redirect("/cart"))
+    .catch((err) => console.log(err));
 };
