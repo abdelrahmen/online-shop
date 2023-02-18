@@ -27,14 +27,20 @@
                         <td><%= items[i].price * items[i].amount %></td>
                         <td>
                             <input type="hidden" name="cartId" value=<%= items[i]._id %>>
-                            <input type="submit" name="btn btn-success" value='save' formaction="/cart/save">
-                            <input type="submit" name="btn btn-danger" value='delete' formaction="/cart/delete">
+                            <input type="submit" class="btn btn-success" value='save' formaction="/cart/save">
+                            <input type="submit" class="btn btn-danger" value='delete' formaction="/cart/delete">
                         </td>
                     </form>
                 </tr>
             <% } %>
         </tbody>
     </table>
+    <div class="fixed-bottom d-flex justify-content-end" style="padding: 20px">
+        <form method="post">
+            <button class="btn btn-success" style="margin-right: 20px">Submit All</button>
+            <button class="btn btn-danger" formaction="/cart/delete-all">Delete All</button>
+        </form>
+      </div>
   <% } %>
 </div>
 <%-include('parts/footer.ejs')%>
