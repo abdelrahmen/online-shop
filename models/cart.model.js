@@ -18,8 +18,24 @@ exports.addNewItem = (data) => {
     mongoose
       .connect(DB_URL)
       .then(() => {
-        let item = CartItem(data);
-        return item.save();
+        return CartItem.find({
+          userId: data.userId,
+          productId: data.productId,
+        });
+      })
+      .then((items) => {
+        if (items.length != 0) {
+          return CartItem.updateOne(
+            { userId: data.userId, productId: data.productId },
+            {
+              amount: +data.amount + +items[0].amount,
+              timestamp: data.timestamp,
+            }
+          );
+        } else {
+          let item = CartItem(data);
+          return item.save();
+        }
       })
       .then(() => {
         mongoose.disconnect();
@@ -66,7 +82,7 @@ exports.editItem = (id, newData) => {
   });
 };
 
-exports.deleteItem = (id)=>{
+exports.deleteItem = (id) => {
   return new Promise((resolve, reject) => {
     mongoose
       .connect(DB_URL)
@@ -80,4 +96,4 @@ exports.deleteItem = (id)=>{
         reject(err);
       });
   });
-}
+};
