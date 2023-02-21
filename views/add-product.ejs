@@ -1,0 +1,24 @@
+<%- include('parts/header.ejs')%> <%- include('parts/navbar.ejs')%>
+<div class="container">
+  <text-center>
+    <h3>Add Product</h3>
+    <form action="/admin/add" method="post">
+      <input type="text" class="form-control" name="name" placeholder="Name" />
+      <% let nameError = validationErrors.find(err=> err.param == 'name') %> <%
+      if (nameError) { %>
+      <p class="alert aler-danger"><%= nameError.msg %></p>
+      <% } %>
+      <input
+        type="number"
+        name="price"
+        class="form-control"
+        placeholder="Price"
+      />
+      <% let priceError = validationErrors.find(err=> err.param == 'price') %>
+      <% if (priceError) { %>
+      <p class="alert aler-danger"><%= priceError.msg %></p>
+      <% } %>
+    </form>
+  </text-center>
+</div>
+<%-include('parts/footer.ejs')%>

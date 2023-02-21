@@ -5,6 +5,7 @@ exports.getProduct = (req, res, next) => {
     res.render("../views/product.ejs", {
       product: product,
       isUser: req.session.userId,
+      isAdmin: req.session.isAdmin,
     });
   });
 };
@@ -15,6 +16,7 @@ exports.getProductById = (req, res, next) => {
     res.render("../views/product.ejs", {
       product: product,
       isUser: req.session.userId,
+      isAdmin: req.session.isAdmin,
       validationErrors: req.flash('validationErrors')[0]
     });
   });

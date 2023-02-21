@@ -9,6 +9,7 @@ const homeRouter = require("./routes/home.route.js");
 const productRouter = require("./routes/product.route");
 const authRouter = require("./routes/auth.route");
 const cartRouter = require('./routes/cart.route')
+const adminRouter = require('./routes/admin.route')
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use("/", homeRouter);
 app.use("/", authRouter);
 app.use("/product", productRouter);
 app.use("/cart", cartRouter);
+app.use("/admin", adminRouter);
 
 app.listen(3000, (err) => {
   console.log("server listening on port 3000, http://localhost:3000");
