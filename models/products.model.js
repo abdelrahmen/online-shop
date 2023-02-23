@@ -90,3 +90,22 @@ exports.getFirstProduct = () => {
       });
   });
 };
+
+exports.addNewProduct = (data) => {
+  return new Promise((resolve, reject) => {
+    mongoose
+      .connect(DB_URL)
+      .then(() => {
+        let newProduct = new product(data)
+        return newProduct.save();
+      })
+      .then((product) => {
+        mongoose.disconnect();
+        resolve(product);
+      })
+      .catch((err) => {
+        mongoose.disconnect();
+        reject(err);
+      });
+  });
+};

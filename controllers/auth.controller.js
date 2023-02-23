@@ -6,7 +6,7 @@ exports.getSignup = (req, res, next) => {
     validationErrors: req.flash("validationErrors"),
     isUser: req.session.userId,
     isAdmin: false,
-
+    pageTitle: 'Signup'
   });
 };
 
@@ -30,6 +30,7 @@ exports.getLogin = (req, res, next) => {
     validationErrors: req.flash("validationErrors"),
     isUser: req.session.userId,
     isAdmin: false,
+    pageTitle: 'Login'
   });
 };
 

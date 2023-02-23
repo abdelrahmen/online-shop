@@ -18,6 +18,7 @@ exports.getHome = (req, res, next) => {
         isUser: req.session.userId,
         isAdmin: req.session.isAdmin,
         validationErrors: req.flash("validationErrors")[0],
+        pageTitle: 'Home - online shop'
       });
     });
   }

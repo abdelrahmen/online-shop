@@ -15,36 +15,36 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link active" aria-current="Home" href="/">Home</a>
         </li>
         <% if (isUser) { %>
 
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/cart">Cart</a>
+          <a class="nav-link active" aria-current="Cart" href="/cart">Cart</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/orders"
+          <a class="nav-link active" aria-current="Orders" href="/orders"
             >Orders</a
           >
         </li>
         <% }else{ %>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/login">Login</a>
+          <a class="nav-link active" aria-current="Login" href="/login">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/signup"
+          <a class="nav-link active" aria-current="signup" href="/signup"
             >Sign Up</a
           >
         </li>
         <% } %>
         <% if (isAdmin) { %>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/admin/add"
+            <a class="nav-link active" aria-current="Add Products" href="/admin/add"
               >Add Products</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/admin/orders"
+            <a class="nav-link active" aria-current="manage orders" href="/admin/orders"
               >manage orders</a
             >
           </li>
